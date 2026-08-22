@@ -3,7 +3,7 @@
 Dashboard de acompanhamento do Processo Seletivo IFMG 2027, com **coleta autônoma** dos dados de inscrições do painel da Fundação CEFET-MG.
 
 - **Stack**: Next.js 16 (App Router) + TypeScript + Tailwind v4 + Recharts (mobile-first) · coleta em Python (Selenium/requests) · Docker Compose.
-- **Coleta**: agenda **07h, 12h, 18h e 22h** (fuso `America/Sao_Paulo`), com **retry por modalidade** e **gate de completude** — só coletas com as 3 modalidades (INT/SUB/SUP) válidas entram na base. Se alguma falhar após as tentativas, a coleta é abortada e a base **não é alterada**.
+- **Coleta**: agenda **07h, 09h, 12h, 15h, 18h, 20h e 22h** (fuso `America/Sao_Paulo`), com **retry por modalidade** e **gate de completude** — só coletas com as 3 modalidades (INT/SUB/SUP) válidas entram na base. Se alguma falhar após as tentativas, a coleta é abortada e a base **não é alterada**.
 - **Dados**: CSVs persistidos em `./dados` (volume). O dashboard sincroniza sozinho (~30s) quando a coleta atualiza a base.
 
 ## Estrutura
