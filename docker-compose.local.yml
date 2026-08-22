@@ -1,0 +1,30 @@
+# Versão para DEV LOCAL (sem Traefik). Usa network_mode: host porque o daemon
+# Docker local não tem mais pool de redes bridge disponível.
+# Uso: docker compose -f docker-compose.local.yml up -d
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    volumes:
+      - ./dados:/app/dados
+    environment:
+      - TZ=America/Sao_Paulo
+      - PORT=3053
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    network_mode: host
+    volumes:
+      - ./dados:/app/dados
+      - ./logs:/app/logs
+    environment:
+      - TZ=America/Sao_Paulo
+    env_file:
+      - .env.local
+    restart: unless-stopped

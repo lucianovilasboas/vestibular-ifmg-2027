@@ -1,0 +1,171 @@
+Campus,Curso,Modalidade,FormaSelecao,Turno,TotalVagas
+ARCOS,Técnico Integrado em Administração,INT,,Manhã e Tarde,45
+ARCOS,Técnico Integrado em Mecânica,INT,,Manhã e Tarde,45
+BAMBUÍ,Técnico Integrado em Administração,INT,,Manhã e Tarde,40
+BAMBUÍ,Técnico Integrado em Agroindústria,INT,,Manhã e Tarde,30
+BAMBUÍ,Técnico Integrado em Agropecuária,INT,,Manhã e Tarde,90
+BAMBUÍ,Técnico Integrado em Biotecnologia,INT,,Manhã e Tarde,30
+BAMBUÍ,Técnico Integrado em Eletromecânica,INT,,Manhã e Tarde,32
+BAMBUÍ,Técnico Integrado em Informática,INT,,Manhã e Tarde,35
+BETIM,Técnico Integrado em Automação Industrial,INT,,Manhã e Tarde,60
+BETIM,Técnico Integrado em Mecânica,INT,,Manhã e Tarde,60
+BETIM,Técnico Integrado em Química,INT,,Manhã e Tarde,60
+CONGONHAS,Técnico Integrado em Edificações,INT,,Manhã e Tarde,70
+CONGONHAS,Técnico Integrado em Mecânica,INT,,Manhã e Tarde,35
+CONGONHAS,Técnico Integrado em Mineração,INT,,Manhã e Tarde,35
+CONSELHEIRO LAFAIETE,Técnico Integrado em Eletrotécnica,INT,,Manhã e Tarde,40
+CONSELHEIRO LAFAIETE,Técnico Integrado em Mecânica,INT,,Manhã e Tarde,40
+CONSELHEIRO LAFAIETE,Técnico Integrado em Segurança do Trabalho,INT,,Manhã e Tarde,40
+FORMIGA,Técnico Integrado em Administração,INT,,Manhã e Tarde,40
+FORMIGA,Técnico Integrado em Eletrotécnica,INT,,Manhã e Tarde,35
+FORMIGA,Técnico Integrado em Informática,INT,,Manhã e Tarde,40
+GOVERNADOR VALADARES,Técnico Integrado em Edificações,INT,,Manhã e Tarde,40
+GOVERNADOR VALADARES,Técnico Integrado em Meio Ambiente,INT,,Manhã e Tarde,40
+GOVERNADOR VALADARES,Técnico Integrado em Segurança do Trabalho,INT,,Manhã e Tarde,40
+IBIRITÉ,Técnico Integrado em Automação Industrial,INT,,Manhã e Tarde,40
+IBIRITÉ,Técnico Integrado em Informática,INT,,Manhã e Tarde,40
+IBIRITÉ,Técnico Integrado em Mecatrônica,INT,,Manhã e Tarde,40
+IBIRITÉ,Técnico Integrado em Sistemas de Energia Renovável,INT,,Manhã e Tarde,40
+IPATINGA,Técnico Integrado em Automação Industrial,INT,,Manhã e Tarde,40
+IPATINGA,Técnico Integrado em Eletrotécnica,INT,,Manhã e Tarde,40
+ITABIRITO,Técnico Integrado em Automação Industrial,INT,,Manhã e Tarde,70
+ITABIRITO,Técnico Integrado em Desenvolvimento de Sistemas,INT,,Manhã e Tarde,30
+OURO BRANCO,Técnico Integrado em Administração,INT,,Manhã e Tarde,40
+OURO BRANCO,Técnico Integrado em Informática,INT,,Manhã e Tarde,40
+OURO BRANCO,Técnico Integrado em Metalurgia,INT,,Manhã e Tarde,40
+OURO PRETO,Técnico Integrado em Administração,INT,,Manhã e Tarde,60
+OURO PRETO,Técnico Integrado em Automação Industrial,INT,,Manhã e Tarde,80
+OURO PRETO,Técnico Integrado em Edificações,INT,,Manhã e Tarde,90
+OURO PRETO,Técnico Integrado em Metalurgia,INT,,Manhã e Tarde,90
+OURO PRETO,Técnico Integrado em Mineração,INT,,Manhã e Tarde,90
+PIUMHI,Técnico Integrado em Edificações,INT,,Manhã e Tarde,80
+PONTE NOVA,Técnico Integrado em Administração,INT,,Manhã e Tarde,40
+PONTE NOVA,Técnico Integrado em Informática,INT,,Manhã e Tarde,35
+RIBEIRÃO DAS NEVES,Técnico Integrado em Administração,INT,,Manhã e Tarde,60
+RIBEIRÃO DAS NEVES,Técnico Integrado em Eletroeletrônica,INT,,Manhã e Tarde,35
+RIBEIRÃO DAS NEVES,Técnico Integrado em Informática,INT,,Manhã e Tarde,60
+SABARÁ,Técnico Integrado em Administração,INT,,Manhã e Tarde,35
+SABARÁ,Técnico Integrado em Eletrônica,INT,,Manhã e Tarde,70
+SABARÁ,Técnico Integrado em Informática,INT,,Manhã e Tarde,35
+SANTA LUZIA,Técnico Integrado em Edificações,INT,,Manhã e Tarde,80
+SANTA LUZIA,Técnico Integrado em Meio Ambiente,INT,,Manhã e Tarde,40
+SANTA LUZIA,Técnico Integrado em Segurança do Trabalho,INT,,Manhã e Tarde,40
+SÃO JOÃO EVANGELISTA,Técnico Integrado em Agrimensura,INT,,Manhã e Tarde,40
+SÃO JOÃO EVANGELISTA,Técnico Integrado em Agropecuária,INT,,Manhã e Tarde,70
+SÃO JOÃO EVANGELISTA,Técnico Integrado em Informática,INT,,Manhã e Tarde,70
+SÃO JOÃO EVANGELISTA,Técnico Integrado em Nutrição e Dietética,INT,,Manhã e Tarde,70
+BAMBUÍ,Técnico Subsequente em Agropecuária,SUB,,Manhã e Tarde,30
+CONGONHAS,Técnico Subsequente em Mecânica,SUB,,Noite,35
+CONGONHAS,Técnico Subsequente em Mineração,SUB,,Noite,35
+CONSELHEIRO LAFAIETE,Técnico Subsequente em Eletrotécnica,SUB,,Noite,40
+CONSELHEIRO LAFAIETE,Técnico Subsequente em Mecânica,SUB,,Noite,40
+GOVERNADOR VALADARES,Técnico Subsequente em Segurança do Trabalho,SUB,,Noite,40
+IPATINGA,Técnico Subsequente em Eletrotécnica,SUB,,Noite,40
+OURO PRETO,Técnico Subsequente em Edificações,SUB,,Noite,30
+OURO PRETO,Técnico Subsequente em Joalheria,SUB,,Noite,12
+OURO PRETO,Técnico Subsequente em Metalurgia,SUB,,Noite,20
+OURO PRETO,Técnico Subsequente em Meio Ambiente,SUB,,Noite,30
+OURO PRETO,Técnico Subsequente em Mineração,SUB,,Noite,30
+OURO PRETO,Técnico Subsequente em Segurança do Trabalho,SUB,,Noite,70
+PIUMHI,Técnico Subsequente em Enfermagem,SUB,,Noite,30
+RIBEIRÃO DAS NEVES,Técnico Subsequente em Logística,SUB,,100% EAD,120
+SANTA LUZIA,Técnico Subsequente em Segurança do Trabalho,SUB,,Noite,40
+SANTA LUZIA,Técnico Subsequente em Defesa Civil,SUB,,80% EAD,60
+ARCOS,Engenharia Mecânica,SUP,ENEM,Noite,20
+ARCOS,Engenharia Mecânica,SUP,Histórico e Redação,Noite,15
+ARCOS,Direito,SUP,Histórico e Redação,Noite,15
+BAMBUÍ,Administração,SUP,ENEM,Noite,20
+BAMBUÍ,Agronomia,SUP,ENEM,Manhã e Tarde,30
+BAMBUÍ,Ciências Biológicas,SUP,ENEM,Noite,13
+BAMBUÍ,Ciências Biológicas,SUP,Histórico e Redação,Noite,12
+BAMBUÍ,Educação Física,SUP,ENEM,Noite,14
+BAMBUÍ,Educação Física,SUP,Histórico e Redação,Noite,12
+BAMBUÍ,Inteligência Artificial,SUP,ENEM,Manhã e Tarde,25
+BAMBUÍ,Engenharia de Produção,SUP,ENEM,Manhã e Tarde,20
+BAMBUÍ,Engenharia de Produção,SUP,Histórico e Redação,Manhã e Tarde,5
+BAMBUÍ,Física,SUP,ENEM,Noite,14
+BAMBUÍ,Física,SUP,Histórico e Redação,Noite,12
+BAMBUÍ,Medicina Veterinária,SUP,ENEM,Manhã e Tarde,25
+BAMBUÍ,Zootecnia,SUP,ENEM,Manhã e Tarde,20
+BAMBUÍ,Zootecnia,SUP,Histórico e Redação,Manhã e Tarde,4
+BETIM,Engenharia de Controle e Automação,SUP,ENEM,Noite,18
+BETIM,Engenharia Mecânica,SUP,ENEM,Noite,18
+BETIM,Química,SUP,ENEM,Noite,20
+CONGONHAS,Engenharia de Produção,SUP,ENEM,Noite,20
+CONGONHAS,Física,SUP,ENEM,Noite,10
+CONGONHAS,Física,SUP,Histórico e Redação,Noite,10
+CONGONHAS,Letras (Português/Inglês),SUP,ENEM,Noite,10
+CONGONHAS,Letras (Português/Inglês),SUP,Histórico e Redação,Noite,10
+FORMIGA,Administração,SUP,ENEM,Noite,15
+FORMIGA,Administração,SUP,Histórico e Redação,Noite,15
+FORMIGA,Ciência da Computação,SUP,ENEM,Manhã e Tarde,20
+FORMIGA,Ciência da Computação,SUP,Histórico e Redação,Manhã e Tarde,8
+FORMIGA,Engenharia Elétrica,SUP,ENEM,Noite,12
+FORMIGA,Engenharia Elétrica,SUP,Histórico e Redação,Noite,14
+FORMIGA,Matemática,SUP,ENEM,Noite,15
+FORMIGA,Matemática,SUP,Histórico e Redação,Noite,10
+GOVERNADOR VALADARES,Engenharia Ambiental e Sanitária,SUP,ENEM,Manhã e Noite,17
+GOVERNADOR VALADARES,Engenharia Ambiental e Sanitária,SUP,Histórico e Redação,Manhã e Noite,17
+GOVERNADOR VALADARES,Engenharia Civil,SUP,ENEM,Noite,17
+GOVERNADOR VALADARES,Engenharia Civil,SUP,Histórico e Redação,Noite,17
+GOVERNADOR VALADARES,Engenharia de Produção,SUP,ENEM,Noite,17
+GOVERNADOR VALADARES,Engenharia de Produção,SUP,Histórico e Redação,Noite,17
+GOVERNADOR VALADARES,Gestão Ambiental,SUP,ENEM,Noite,17
+GOVERNADOR VALADARES,Gestão Ambiental,SUP,Histórico e Redação,Noite,17
+IBIRITÉ,Ciência da Computação,SUP,ENEM,Noite,20
+IBIRITÉ,Engenharia de Controle e Automação,SUP,ENEM,Noite,20
+IPATINGA,Engenharia Elétrica,SUP,ENEM,"Manhã, Tarde e Noite",15
+IPATINGA,Engenharia Elétrica,SUP,Histórico e Redação,"Manhã, Tarde e Noite",10
+ITABIRITO,Engenharia Elétrica,SUP,ENEM,Noite,10
+ITABIRITO,Engenharia Elétrica,SUP,Histórico e Redação,Noite,10
+OURO BRANCO,Administração,SUP,ENEM,Noite,20
+OURO BRANCO,Administração,SUP,Histórico e Redação,Noite,20
+OURO BRANCO,Engenharia Metalúrgica,SUP,ENEM,Noite,10
+OURO BRANCO,Engenharia Metalúrgica,SUP,Histórico e Redação,Noite,25
+OURO BRANCO,Pedagogia,SUP,ENEM,Noite,20
+OURO BRANCO,Pedagogia,SUP,Histórico e Redação,Noite,20
+OURO BRANCO,Sistemas de Informação,SUP,ENEM,Noite,15
+OURO BRANCO,Sistemas de Informação,SUP,Histórico e Redação,Noite,25
+OURO PRETO,Análise e Desenvolvimento de Sistemas,SUP,ENEM,Noite,15
+OURO PRETO,Análise e Desenvolvimento de Sistemas,SUP,Histórico e Redação,Noite,5
+OURO PRETO,Conservação e Restauro,SUP,ENEM,Noite,15
+OURO PRETO,Conservação e Restauro,SUP,Histórico e Redação,Noite,15
+OURO PRETO,Física,SUP,ENEM,Noite,10
+OURO PRETO,Física,SUP,Histórico e Redação,Noite,5
+OURO PRETO,Geografia,SUP,ENEM,Noite,15
+OURO PRETO,Geografia,SUP,Histórico e Redação,Noite,15
+OURO PRETO,Gestão da Qualidade,SUP,ENEM,Noite,18
+PIUMHI,Engenharia Civil,SUP,ENEM,Noite,20
+PONTE NOVA,Processos Gerenciais,SUP,ENEM,Noite,20
+PONTE NOVA,Processos Gerenciais,SUP,Histórico e Redação,Noite,20
+RIBEIRÃO DAS NEVES,Administração,SUP,ENEM,Noite,20
+RIBEIRÃO DAS NEVES,Análise e Desenvolvimento de Sistemas,SUP,ENEM,Noite,18
+RIBEIRÃO DAS NEVES,Processos Gerenciais,SUP,ENEM,Noite,20
+SABARÁ,Administração,SUP,ENEM,Noite,15
+SABARÁ,Administração,SUP,Histórico e Redação,Noite,15
+SABARÁ,Engenharia de Controle e Automação,SUP,ENEM,Noite,16
+SABARÁ,Engenharia de Controle e Automação,SUP,Histórico e Redação,Noite,12
+SABARÁ,Logística,SUP,ENEM,Noite,10
+SABARÁ,Logística,SUP,Histórico e Redação,Noite,30
+SABARÁ,Sistemas de Informação,SUP,ENEM,Manhã,15
+SABARÁ,Sistemas de Informação,SUP,Histórico e Redação,Manhã,10
+SANTA LUZIA,Arquitetura e Urbanismo,SUP,ENEM,Tarde,20
+SANTA LUZIA,Arquitetura e Urbanismo,SUP,Histórico e Redação,Tarde,10
+SANTA LUZIA,Design de Interiores,SUP,ENEM,Noite,20
+SANTA LUZIA,Design de Interiores,SUP,Histórico e Redação,Noite,10
+SANTA LUZIA,Engenharia Civil,SUP,ENEM,Noite,20
+SANTA LUZIA,Engenharia Civil,SUP,Histórico e Redação,Noite,10
+SÃO JOÃO EVANGELISTA,Administração,SUP,ENEM,Noite,15
+SÃO JOÃO EVANGELISTA,Administração,SUP,Histórico e Redação,Noite,15
+SÃO JOÃO EVANGELISTA,Agronomia,SUP,ENEM,Manhã e Tarde,15
+SÃO JOÃO EVANGELISTA,Agronomia,SUP,Histórico e Redação,Manhã e Tarde,15
+SÃO JOÃO EVANGELISTA,Ciências Biológicas,SUP,ENEM,Noite,15
+SÃO JOÃO EVANGELISTA,Ciências Biológicas,SUP,Histórico e Redação,Noite,15
+SÃO JOÃO EVANGELISTA,Engenharia Florestal,SUP,ENEM,Manhã e Tarde,15
+SÃO JOÃO EVANGELISTA,Engenharia Florestal,SUP,Histórico e Redação,Manhã e Tarde,15
+SÃO JOÃO EVANGELISTA,Matemática,SUP,ENEM,Noite,15
+SÃO JOÃO EVANGELISTA,Matemática,SUP,Histórico e Redação,Noite,15
+SÃO JOÃO EVANGELISTA,Pedagogia,SUP,ENEM,Noite,15
+SÃO JOÃO EVANGELISTA,Pedagogia,SUP,Histórico e Redação,Noite,15
+SÃO JOÃO EVANGELISTA,Sistemas de Informação,SUP,ENEM,Manhã e Tarde,15
+SÃO JOÃO EVANGELISTA,Sistemas de Informação,SUP,Histórico e Redação,Manhã e Tarde,15

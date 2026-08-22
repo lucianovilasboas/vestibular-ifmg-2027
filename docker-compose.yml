@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - proxy
+    volumes:
+      - ./dados:/app/dados
+    environment:
+      - TZ=America/Sao_Paulo
+      - PORT=3053
+      - HOSTNAME=0.0.0.0
+    ports:
+      - "3053:3053"
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vestibular.rule=Host(`ifmg-2027.lucianovilasboas.com.br`)"
+      - "traefik.http.routers.vestibular.entrypoints=websecure"
+      - "traefik.http.routers.vestibular.tls.certresolver=letsencrypt"
+      - "traefik.http.services.vestibular.loadbalancer.server.port=3053"
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    networks:
+      - proxy
+    volumes:
+      - ./dados:/app/dados
+      - ./logs:/app/logs
+    environment:
+      - TZ=America/Sao_Paulo
+    env_file:
+      - .env.local
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=false"
+
+networks:
+  proxy:
+    external: true

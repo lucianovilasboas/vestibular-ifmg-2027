@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+logs
+nohup.out
+scripts
+dados/input
+dados/backup
+dados/quarentena

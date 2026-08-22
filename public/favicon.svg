@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Processo Seletivo IFMG 2027">
+  <title>Processo Seletivo IFMG 2027</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12382a"/>
+      <stop offset="0.5" stop-color="#1a4a38"/>
+      <stop offset="1" stop-color="#1f5c45"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.33" r="0.7">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="url(#glow)"/>
+
+  <g>
+    <polygon points="256,100 374,154 256,208 138,154" fill="#e9f6ee"/>
+    <polygon points="228,200 284,200 270,240 242,240" fill="#cfe7d8"/>
+    <line x1="352" y1="146" x2="396" y2="280" stroke="#d9a441" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="352" cy="146" r="9" fill="#d9a441"/>
+  </g>
+
+  <text x="256" y="338" text-anchor="middle" dominant-baseline="central"
+        font-family="Arial, Helvetica, sans-serif" font-size="208" font-weight="800"
+        fill="#ffffff">27</text>
+</svg>
