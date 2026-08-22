@@ -17,6 +17,7 @@ import requests
 import pandas as pd
 import os
 import re
+import shutil
 import sys
 import time
 from datetime import datetime
@@ -116,7 +117,11 @@ def create_driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--remote-debugging-port=9222")
-    driver = webdriver.Chrome(service=Service(), options=options)
+    # Caminhos explícitos do chromium/chromedriver instalados via apt.
+    # Evita o Selenium Manager, que não suporta linux/aarch64 (VPS ARM).
+    options.binary_location = shutil.which("chromium") or "/usr/bin/chromium"
+    service = Service(executable_path=shutil.which("chromedriver") or "/usr/bin/chromedriver")
+    driver = webdriver.Chrome(service=service, options=options)
     driver.set_page_load_timeout(60)
     return driver
 
