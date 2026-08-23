@@ -1,5 +1,6 @@
 "use client"
 
+import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function ChipBar({
@@ -40,6 +41,33 @@ export function ChipBar({
         </button>
       ))}
     </div>
+  )
+}
+
+export function BotaoFavorito({
+  ativo, onClick, disabled,
+}: {
+  ativo: boolean
+  onClick: () => void
+  disabled?: boolean
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={ativo ? "Desfavoritar campus" : "Favoritar campus"}
+      title={ativo ? "Campus favorito — clique para desfavoritar" : "Favoritar este campus"}
+      className={cn(
+        "inline-flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors",
+        ativo
+          ? "border-primary bg-primary/10 text-primary"
+          : "border-border bg-card text-muted-foreground hover:bg-muted hover:text-foreground",
+        disabled && "pointer-events-none opacity-50"
+      )}
+    >
+      <Star className={cn("size-4", ativo && "fill-current")} />
+    </button>
   )
 }
 

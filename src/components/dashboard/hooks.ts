@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useMemo } from "react"
+import { getCampusFavorito, setCampusFavorito, campusIgual } from "@/lib/favorito"
 
 export function useDados<T>(view: string, params: Record<string, string | undefined>, versao?: string) {
   const [data, setData] = useState<T | null>(null)
@@ -32,4 +33,31 @@ export function useDados<T>(view: string, params: Record<string, string | undefi
   }, [carregar])
 
   return { data, loading, error, recarregar: carregar }
+}
+
+export function useCampusFavorito(opcoes: string[]) {
+  const [favorito, setFavorito] = useState<string | null>(null)
+
+  useEffect(() => {
+    setFavorito(getCampusFavorito())
+  }, [])
+
+  const campusInicial = useMemo(() => {
+    if (!favorito) return null
+    return opcoes.find((o) => campusIgual(o, favorito)) ?? null
+  }, [favorito, opcoes])
+
+  const alternar = (campus: string) => {
+    if (campusIgual(campus, favorito ?? "")) {
+      setCampusFavorito(null)
+      setFavorito(null)
+    } else {
+      setCampusFavorito(campus)
+      setFavorito(campus)
+    }
+  }
+
+  const ehAtivo = (campus: string) => !!favorito && campusIgual(campus, favorito)
+
+  return { favorito, campusInicial, alternar, ehAtivo }
 }

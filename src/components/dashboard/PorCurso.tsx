@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { KpiCard, GradeKpi } from "@/components/dashboard/kpi-cards"
-import { ChipBar, SelectField } from "@/components/dashboard/ui-inputs"
-import { useDados } from "@/components/dashboard/hooks"
+import { ChipBar, SelectField, BotaoFavorito } from "@/components/dashboard/ui-inputs"
+import { useDados, useCampusFavorito } from "@/components/dashboard/hooks"
 import { GraficoEvolucao, GraficoBarrasHorizontais } from "@/components/dashboard/graficos"
 import { fmt } from "@/lib/utils"
 import { MODALIDADE_LABELS, COTA_LABELS } from "@/types"
@@ -20,6 +20,11 @@ export function PorCurso({ meta, versao }: { meta: MetaDados; versao?: string })
 
   const dados = useDados<CursosData>("cursos", { unidade, modalidade, curso }, versao)
 
+  const { campusInicial, alternar, ehAtivo } = useCampusFavorito(meta.unidades)
+  useEffect(() => {
+    if (campusInicial) setUnidade(campusInicial)
+  }, [campusInicial])
+
   const mudaUnidade = (v: string) => { setUnidade(v); setCurso(TOTAL) }
   const mudaModalidade = (v: string) => { setModalidade(v); setCurso(TOTAL) }
 
@@ -32,7 +37,14 @@ export function PorCurso({ meta, versao }: { meta: MetaDados; versao?: string })
     <div className="space-y-5">
       <div className="space-y-3">
         <div>
-          <p className="mb-1.5 text-xs font-medium text-muted-foreground">Campus</p>
+          <div className="mb-1.5 flex items-center gap-2">
+            <p className="text-xs font-medium text-muted-foreground">Campus</p>
+            <BotaoFavorito
+              ativo={unidade !== TOTAL && ehAtivo(unidade)}
+              disabled={unidade === TOTAL}
+              onClick={() => alternar(unidade)}
+            />
+          </div>
           <ChipBar options={meta.unidades} value={unidade} onChange={mudaUnidade} />
         </div>
         <div>

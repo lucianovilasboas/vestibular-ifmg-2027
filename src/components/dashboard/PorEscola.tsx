@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { ChipBar } from "@/components/dashboard/ui-inputs"
-import { useDados } from "@/components/dashboard/hooks"
+import { ChipBar, BotaoFavorito } from "@/components/dashboard/ui-inputs"
+import { useDados, useCampusFavorito } from "@/components/dashboard/hooks"
 import { GraficoEvolucao, GraficoBarrasHorizontais, GraficoDonut, formataDataCompleta } from "@/components/dashboard/graficos"
 import { TabelaEscolas } from "@/components/dashboard/tabelas"
 import { fmt } from "@/lib/utils"
@@ -21,6 +21,11 @@ export function PorEscola({ meta, versao }: { meta: MetaDados; versao?: string }
 
   const opcoesModalidade = meta.modalidades
   const opcoesCampus = meta.campiEscolas
+
+  const { campusInicial, alternar, ehAtivo } = useCampusFavorito(meta.campiEscolas)
+  useEffect(() => {
+    if (campusInicial) setCampus(campusInicial)
+  }, [campusInicial])
 
   const top30 = dados.data?.top30 ?? []
   const donuts = dados.data?.donuts ?? { tipo: [], area: [], cidade: [] }
@@ -41,7 +46,14 @@ export function PorEscola({ meta, versao }: { meta: MetaDados; versao?: string }
           />
         </div>
         <div>
-          <p className="mb-1.5 text-xs font-medium text-muted-foreground">Campus</p>
+          <div className="mb-1.5 flex items-center gap-2">
+            <p className="text-xs font-medium text-muted-foreground">Campus</p>
+            <BotaoFavorito
+              ativo={campus !== TOTAL && ehAtivo(campus)}
+              disabled={campus === TOTAL}
+              onClick={() => alternar(campus)}
+            />
+          </div>
           <ChipBar options={opcoesCampus} value={campus} onChange={setCampus} />
         </div>
       </div>
