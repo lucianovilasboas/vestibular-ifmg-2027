@@ -156,7 +156,7 @@ export function VisaoGeral({ meta, versao }: { meta: MetaDados; versao?: string 
             </CardHeader>
             <CardContent>
               {evolUnidades.length
-                ? <GraficoEvolucao data={evolUnidades} altura={420} />
+                 ? <GraficoEvolucao data={evolUnidades} altura={600} />
                 : <p className="py-6 text-center text-sm text-muted-foreground">Sem dados para exibir.</p>}
             </CardContent>
           </Card>

@@ -74,3 +74,15 @@
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+.legend-evolucao .recharts-default-legend {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.legend-evolucao .recharts-default-legend li {
+  display: inline-flex !important;
+  align-items: center !important;
+}

@@ -110,21 +110,23 @@ export function GraficoEvolucao({ data, altura = 320 }: { data: PontoEvolucao[];
     : [{ key: "__total", cor: "#2e7d32" }]
 
   return (
-    <ResponsiveContainer width="100%" height={altura}>
-      <LineChart data={chartData} margin={{ left: 0, right: 16, top: 10, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="hsl(155 15% 90%)" />
-        <XAxis
-          dataKey="_ts"
-          type="number"
-          domain={["dataMin", "dataMax"]}
-          tickCount={6}
-          minTickGap={24}
-          tick={{ fontSize: 11 }}
-          tickFormatter={(v: number) => formataTsEixo(v)}
-        />
-        <YAxis tick={{ fontSize: 11 }} width={44} tickFormatter={(v: number) => fmtEixo(v)} />
-        <Tooltip content={<TooltipEvolucao multi={multi} />} />
-        <Legend wrapperStyle={{ fontSize: 12, paddingTop: 6 }} iconType="plainline" />
+    <div className="legend-evolucao">
+      <ResponsiveContainer width="100%" height={altura}>
+        <LineChart data={chartData} margin={{ left: 0, right: 16, top: 10, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(155 15% 90%)" />
+          <XAxis
+            dataKey="_ts"
+            type="number"
+            domain={["dataMin", "dataMax"]}
+            tickCount={6}
+            minTickGap={24}
+            tick={{ fontSize: 11 }}
+            tickFormatter={(v: number) => formataTsEixo(v)}
+          />
+          <YAxis tick={{ fontSize: 11 }} width={44} tickFormatter={(v: number) => fmtEixo(v)} />
+          <Tooltip content={<TooltipEvolucao multi={multi} />} />
+          <Legend wrapperStyle={{ fontSize: 12, paddingTop: 6 }}
+          iconType="plainline" />
         {series.map((s) => (
           <Line key={s.key} type="monotone" dataKey={s.key}
             name={multi ? (MODALIDADE_LABELS[s.key] ?? s.key) : "Inscrições"}
@@ -134,7 +136,8 @@ export function GraficoEvolucao({ data, altura = 320 }: { data: PontoEvolucao[];
             animationDuration={800} animationEasing="ease-out" />
         ))}
       </LineChart>
-    </ResponsiveContainer>
+      </ResponsiveContainer>
+    </div>
   )
 }
 
