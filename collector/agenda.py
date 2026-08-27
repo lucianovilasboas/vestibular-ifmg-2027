@@ -3,7 +3,7 @@ import time
 from run_collect import executar_com_lock
 from log import logger
 
-AGENDAS = ["07:00", "09:00", "12:00", "15:00", "18:00", "20:00", "22:00"]
+AGENDAS = ["07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "22:00"]
 
 
 if __name__ == "__main__":
