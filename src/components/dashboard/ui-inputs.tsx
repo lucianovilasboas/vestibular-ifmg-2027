@@ -45,12 +45,14 @@ export function ChipBar({
 }
 
 export function BotaoFavorito({
-  ativo, onClick, disabled,
+  ativo, onClick, disabled, rotulo,
 }: {
   ativo: boolean
   onClick: () => void
   disabled?: boolean
+  rotulo?: string | null
 }) {
+  const pill = ativo && rotulo
   return (
     <button
       type="button"
@@ -59,7 +61,8 @@ export function BotaoFavorito({
       aria-label={ativo ? "Desfavoritar campus" : "Favoritar campus"}
       title={ativo ? "Campus favorito — clique para desfavoritar" : "Favoritar este campus"}
       className={cn(
-        "inline-flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors",
+        "inline-flex shrink-0 items-center justify-center gap-1.5 border transition-colors",
+        pill ? "h-8 rounded-full px-3 text-xs font-medium" : "size-9 rounded-full",
         ativo
           ? "border-primary bg-primary/10 text-primary"
           : "border-border bg-card text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -67,6 +70,7 @@ export function BotaoFavorito({
       )}
     >
       <Star className={cn("size-4", ativo && "fill-current")} />
+      {pill && <span className="whitespace-nowrap">{rotulo}</span>}
     </button>
   )
 }

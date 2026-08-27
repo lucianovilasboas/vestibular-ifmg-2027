@@ -51,6 +51,7 @@ export function PorEscola({ meta, versao }: { meta: MetaDados; versao?: string }
             <BotaoFavorito
               ativo={campus !== TOTAL && ehAtivo(campus)}
               disabled={campus === TOTAL}
+              rotulo={campusInicial}
               onClick={() => alternar(campus)}
             />
           </div>

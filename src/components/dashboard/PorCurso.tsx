@@ -42,6 +42,7 @@ export function PorCurso({ meta, versao }: { meta: MetaDados; versao?: string })
             <BotaoFavorito
               ativo={unidade !== TOTAL && ehAtivo(unidade)}
               disabled={unidade === TOTAL}
+              rotulo={campusInicial}
               onClick={() => alternar(unidade)}
             />
           </div>
