@@ -3,7 +3,7 @@ import path from "path"
 import { parse } from "csv-parse/sync"
 import { log } from "./logger"
 import type {
-  LinhaCurso, LinhaCard, LinhaEscola, LinhaResumoEscola,
+  LinhaCurso, LinhaCard, LinhaEscola, LinhaEscolaTop, LinhaResumoEscola,
   MetaDados, OverviewData, CursosData, EscolasData, DadosCards,
   PontoEvolucao, PontoEvolucaoUnidade, LinhaResumo, BarrasUnidades, CardRow,
 } from "@/types"
@@ -207,12 +207,17 @@ export function loadEscolasResumo(): LinhaResumoEscola[] {
 }
 
 function ultimaColetaPorModalidade(rows: LinhaCurso[]): LinhaCurso[] {
+  return coletaPorModalidade(rows, 0)
+}
+
+function coletaPorModalidade(rows: LinhaCurso[], indice: number): LinhaCurso[] {
   const mods = [...new Set(rows.map((r) => r.Modalidade))]
   const out: LinhaCurso[] = []
   for (const mod of mods) {
-    const dmod = rows.filter((r) => r.Modalidade === mod)
-    const ult = dmod.reduce((a, b) => (a.Data > b.Data ? a : b)).Data
-    out.push(...dmod.filter((r) => r.Data === ult))
+    const datas = [...new Set(rows.filter((r) => r.Modalidade === mod).map((r) => r.Data))].sort()
+    const alvo = datas[datas.length - 1 - indice]
+    if (alvo === undefined) continue
+    out.push(...rows.filter((r) => r.Modalidade === mod && r.Data === alvo))
   }
   return out
 }
@@ -361,12 +366,27 @@ export function getCursos(unidade?: string, modalidade?: string, curso?: string)
   let dfSel = cursoSel ? dfUltima.filter((r) => r.Curso === cursoSel) : dfUltima
   dfSel = dfSel.filter((r) => r.Curso !== "Todos")
 
-  const kpis = {
-    inscritos: dfSel.reduce((s, r) => s + r.Inscritos, 0),
-    homologados: dfSel.reduce((s, r) => s + r.Homologados, 0),
-    vagas: dfSel.reduce((s, r) => s + r.Vagas, 0),
-    inscrVagas: dfSel.length ? dfSel.reduce((s, r) => s + r["Inscr./Vagas"], 0) / dfSel.length : 0,
+  const kpisDe = (rows: LinhaCurso[]) => ({
+    inscritos: rows.reduce((s, r) => s + r.Inscritos, 0),
+    homologados: rows.reduce((s, r) => s + r.Homologados, 0),
+    vagas: rows.reduce((s, r) => s + r.Vagas, 0),
+    inscrVagas: rows.length ? rows.reduce((s, r) => s + r["Inscr./Vagas"], 0) / rows.length : 0,
+  })
+
+  const kpis = kpisDe(dfSel)
+
+  // Snapshot da coleta anterior (para o badge de crescimento)
+  let dfAnterior: LinhaCurso[] = []
+  if (modalidadeSel) {
+    const datas = [...new Set(dfBase.map((r) => r.Data))].sort()
+    const penultima = datas[datas.length - 2]
+    if (penultima !== undefined) dfAnterior = dfBase.filter((r) => r.Data === penultima)
+  } else {
+    dfAnterior = coletaPorModalidade(dfBase, 1)
   }
+  dfAnterior = cursoSel ? dfAnterior.filter((r) => r.Curso === cursoSel) : dfAnterior
+  dfAnterior = dfAnterior.filter((r) => r.Curso !== "Todos")
+  const kpisAnterior = dfAnterior.length ? kpisDe(dfAnterior) : null
 
   let dfEvol = cursoSel ? dfBase.filter((r) => r.Curso === cursoSel) : dfBase
   const evolMap = new Map<string, { data: string; modalidade: string; inscritos: number }>()
@@ -393,7 +413,7 @@ export function getCursos(unidade?: string, modalidade?: string, curso?: string)
 
   const cursosDisponiveis = [...new Set(dfUltima.map((r) => r.Curso).filter(Boolean))].sort()
 
-  return { kpis, evolucao, tabela, cotas, modalidadesDisponiveis, cursosDisponiveis }
+  return { kpis, kpisAnterior, evolucao, tabela, cotas, modalidadesDisponiveis, cursosDisponiveis }
 }
 
 export function getEscolas(modalidade?: string, campus?: string): EscolasData {
@@ -410,7 +430,27 @@ export function getEscolas(modalidade?: string, campus?: string): EscolasData {
   const ultima = ultimaColeta ? base.filter((r) => r.Data === ultimaColeta) : []
 
   const topBase = campusSel ? ultima : ultima.filter((r) => r.Campus === "Todas as unidades")
-  const top30 = [...topBase].sort((a, b) => b.Inscritos - a.Inscritos)
+
+  // Escopo histórico do Top 30 (mesma regra de filtro do topBase), para o delta
+  let topScope = modalidadeSel ? escolas.filter((r) => r.Modalidade === modalidadeSel) : escolas
+  if (campusSel) topScope = topScope.filter((r) => r.Campus === campusSel)
+  else topScope = topScope.filter((r) => r.Campus === "Todas as unidades")
+
+  const seriesTop = new Map<string, { data: string; inscritos: number }[]>()
+  for (const r of topScope) {
+    const k = `${r.Escola}|${r.Modalidade}`
+    const arr = seriesTop.get(k) ?? []
+    arr.push({ data: r.Data, inscritos: r.Inscritos })
+    seriesTop.set(k, arr)
+  }
+
+  const top30: LinhaEscolaTop[] = [...topBase]
+    .sort((a, b) => b.Inscritos - a.Inscritos)
+    .map((r) => {
+      const serie = (seriesTop.get(`${r.Escola}|${r.Modalidade}`) ?? []).sort((a, b) => a.data.localeCompare(b.data))
+      const anterior = serie.at(-2)
+      return { ...r, delta: anterior ? r.Inscritos - anterior.inscritos : null }
+    })
 
   // Donuts (tipo/área/cidade)
   let resumoBase = modalidadeSel ? resumo.filter((r) => r.Modalidade === modalidadeSel) : resumo

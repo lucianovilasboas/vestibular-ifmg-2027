@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { DeltaBadge } from "@/components/dashboard/kpi-cards"
 import { ChipBar, BotaoFavorito } from "@/components/dashboard/ui-inputs"
 import { useDados, useCampusFavorito } from "@/components/dashboard/hooks"
 import { GraficoEvolucao, GraficoBarrasHorizontais, GraficoDonut, formataDataCompleta } from "@/components/dashboard/graficos"
@@ -100,7 +101,10 @@ export function PorEscola({ meta, versao }: { meta: MetaDados; versao?: string }
                         {r.Cidade}{r.Tipo ? ` · ${r.Tipo}` : ""}{r.Area ? ` · ${r.Area}` : ""}
                       </p>
                     </div>
-                    <span className="shrink-0 text-sm font-bold">{fmt(r.Inscritos)}</span>
+                    <div className="flex shrink-0 flex-col items-end gap-0.5">
+                      <span className="text-sm font-bold">{fmt(r.Inscritos)}</span>
+                      {r.delta !== null && <DeltaBadge delta={r.delta} />}
+                    </div>
                   </li>
                 ))}
               </ol>

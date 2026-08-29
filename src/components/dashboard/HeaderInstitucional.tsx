@@ -20,12 +20,21 @@ export function HeaderInstitucional({ ultimaAtualizacao }: { ultimaAtualizacao: 
       <div className="bg-gradient-to-r from-[#0f2e24] via-[#1a4a38] to-[#2e7d32] shadow-md">
         <div className="mx-auto flex h-14 max-w-7xl items-center gap-2.5 px-3 sm:h-16 sm:gap-3 sm:px-4">
           <Image
-            src="/vestibular-2027-imagem.png"
+            src="/ifmg-2027.svg"
             alt="IFMG 2027"
             width={44}
             height={44}
             priority
-            className="h-10 w-auto rounded-md border border-white/25 bg-white/10 sm:h-12"
+            className="h-10 w-auto sm:h-12"
+          />
+          <Image
+            src="/vestibular-2027-imagem.png"
+            alt=""
+            width={795}
+            height={553}
+            priority
+            aria-hidden
+            className="h-8 w-auto opacity-90 sm:h-10"
           />
           <div className="min-w-0 flex-1">
             <h1 className="truncate text-sm leading-tight font-bold text-white sm:text-lg">
