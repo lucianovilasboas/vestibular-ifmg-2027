@@ -71,8 +71,18 @@ export function PorCurso({ meta, versao }: { meta: MetaDados; versao?: string })
       {!dados.loading && !dados.error && dados.data && (
         <>
           <GradeKpi>
-            <KpiCard label="Inscritos" value={fmt(dados.data.kpis.inscritos)} cor="green" />
-            <KpiCard label="Homologados" value={fmt(dados.data.kpis.homologados)} cor="blue" />
+            <KpiCard
+              label="Inscritos"
+              value={fmt(dados.data.kpis.inscritos)}
+              cor="green"
+              delta={dados.data.kpisAnterior ? dados.data.kpis.inscritos - dados.data.kpisAnterior.inscritos : undefined}
+            />
+            <KpiCard
+              label="Homologados"
+              value={fmt(dados.data.kpis.homologados)}
+              cor="blue"
+              delta={dados.data.kpisAnterior ? dados.data.kpis.homologados - dados.data.kpisAnterior.homologados : undefined}
+            />
             <KpiCard label="Vagas" value={fmt(dados.data.kpis.vagas)} cor="orange" />
             <KpiCard label="Inscr./Vagas" value={dados.data.kpis.inscrVagas.toFixed(2)} cor="purple" />
           </GradeKpi>

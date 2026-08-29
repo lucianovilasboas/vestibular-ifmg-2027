@@ -68,6 +68,10 @@ export interface LinhaEscola {
   Modalidade: string
 }
 
+export interface LinhaEscolaTop extends LinhaEscola {
+  delta: number | null
+}
+
 export interface LinhaResumoEscola {
   Campus: string
   Categoria: string
@@ -144,6 +148,7 @@ export interface OverviewData {
 
 export interface CursosData {
   kpis: { inscritos: number; homologados: number; vagas: number; inscrVagas: number }
+  kpisAnterior: { inscritos: number; homologados: number; vagas: number; inscrVagas: number } | null
   evolucao: PontoEvolucao[]
   tabela: (LinhaCurso & {})[]
   cotas: { cota: string; inscritos: number }[]
@@ -153,7 +158,7 @@ export interface CursosData {
 
 export interface EscolasData {
   ultimaColeta: string | null
-  top30: LinhaEscola[]
+  top30: LinhaEscolaTop[]
   donuts: { tipo: { label: string; valor: number }[]; area: { label: string; valor: number }[]; cidade: { label: string; valor: number }[] }
   evolEscolas: { data: string; escola: string; inscritos: number }[]
 }

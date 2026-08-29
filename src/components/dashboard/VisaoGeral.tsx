@@ -36,27 +36,59 @@ export function VisaoGeral({ meta, versao }: { meta: MetaDados; versao?: string 
 
   const linhasCards = [...(cards.data?.rows ?? [])].sort((a, b) => a.Modalidade.localeCompare(b.Modalidade))
 
-  let kpis = { inscricoes: 0, pagas: 0, isencao: 0, isencaoDeferidas: 0, condEspeciais: 0, condDeferidas: 0 }
+  type Kpis = { inscricoes: number; pagas: number; isencao: number; isencaoDeferidas: number; condEspeciais: number; condDeferidas: number }
+
+  let kpis: Kpis = { inscricoes: 0, pagas: 0, isencao: 0, isencaoDeferidas: 0, condEspeciais: 0, condDeferidas: 0 }
+  let deltas: Kpis | null = null
+
   if (linhasCards.length) {
     if (cardMod === TOTAL) {
-      const ultimaData = linhasCards.reduce((a, b) => (a.Data > b.Data ? a : b)).Data
-      const naUltima = linhasCards.filter((r) => r.Data === ultimaData)
-      kpis = {
-        inscricoes: naUltima.reduce((s, r) => s + r.Inscricoes, 0),
-        pagas: naUltima.reduce((s, r) => s + r.InscricoesPagas, 0),
-        isencao: naUltima.reduce((s, r) => s + r.Isencao, 0),
-        isencaoDeferidas: naUltima.reduce((s, r) => s + r.IsencaoDeferidas, 0),
-        condEspeciais: naUltima.reduce((s, r) => s + r.CondicoesEspeciais, 0),
-        condDeferidas: naUltima.reduce((s, r) => s + r.CondicoesDeferidas, 0),
+      const porData = new Map<string, Kpis>()
+      for (const r of linhasCards) {
+        const cur = porData.get(r.Data) ?? { inscricoes: 0, pagas: 0, isencao: 0, isencaoDeferidas: 0, condEspeciais: 0, condDeferidas: 0 }
+        cur.inscricoes += r.Inscricoes
+        cur.pagas += r.InscricoesPagas
+        cur.isencao += r.Isencao
+        cur.isencaoDeferidas += r.IsencaoDeferidas
+        cur.condEspeciais += r.CondicoesEspeciais
+        cur.condDeferidas += r.CondicoesDeferidas
+        porData.set(r.Data, cur)
+      }
+      const datas = [...porData.keys()].sort()
+      const atual = porData.get(datas.at(-1) ?? "")
+      const anterior = porData.get(datas.at(-2) ?? "")
+      if (atual && anterior) {
+        deltas = {
+          inscricoes: atual.inscricoes - anterior.inscricoes,
+          pagas: atual.pagas - anterior.pagas,
+          isencao: atual.isencao - anterior.isencao,
+          isencaoDeferidas: atual.isencaoDeferidas - anterior.isencaoDeferidas,
+          condEspeciais: atual.condEspeciais - anterior.condEspeciais,
+          condDeferidas: atual.condDeferidas - anterior.condDeferidas,
+        }
+        kpis = atual
+      } else if (atual) {
+        kpis = atual
       }
     } else {
       const modRows = linhasCards.filter((r) => r.Modalidade === cardMod)
-      const row = modRows.at(-1)
-      if (row) {
+      const atual = modRows.at(-1)
+      const anterior = modRows.at(-2)
+      if (atual) {
         kpis = {
-          inscricoes: row.Inscricoes, pagas: row.InscricoesPagas, isencao: row.Isencao,
-          isencaoDeferidas: row.IsencaoDeferidas, condEspeciais: row.CondicoesEspeciais,
-          condDeferidas: row.CondicoesDeferidas,
+          inscricoes: atual.Inscricoes, pagas: atual.InscricoesPagas, isencao: atual.Isencao,
+          isencaoDeferidas: atual.IsencaoDeferidas, condEspeciais: atual.CondicoesEspeciais,
+          condDeferidas: atual.CondicoesDeferidas,
+        }
+        if (anterior) {
+          deltas = {
+            inscricoes: atual.Inscricoes - anterior.Inscricoes,
+            pagas: atual.InscricoesPagas - anterior.InscricoesPagas,
+            isencao: atual.Isencao - anterior.Isencao,
+            isencaoDeferidas: atual.IsencaoDeferidas - anterior.IsencaoDeferidas,
+            condEspeciais: atual.CondicoesEspeciais - anterior.CondicoesEspeciais,
+            condDeferidas: atual.CondicoesDeferidas - anterior.CondicoesDeferidas,
+          }
         }
       }
     }
@@ -85,14 +117,14 @@ export function VisaoGeral({ meta, versao }: { meta: MetaDados; versao?: string 
               />
             </div>
             <GradeKpi>
-              <KpiCard label="Inscrições" value={fmt(kpis.inscricoes)} cor="green" />
-              <KpiCard label="Inscrições Pagas" value={fmt(kpis.pagas)} cor="blue" />
-              <KpiCard label="Solic. de Isenção" value={fmt(kpis.isencao)} cor="orange" />
-              <KpiCard label="Isenções Deferidas" value={fmt(kpis.isencaoDeferidas)} cor="purple" />
+              <KpiCard label="Inscrições" value={fmt(kpis.inscricoes)} cor="green" delta={deltas?.inscricoes} />
+              <KpiCard label="Inscrições Pagas" value={fmt(kpis.pagas)} cor="blue" delta={deltas?.pagas} />
+              <KpiCard label="Solic. de Isenção" value={fmt(kpis.isencao)} cor="orange" delta={deltas?.isencao} />
+              <KpiCard label="Isenções Deferidas" value={fmt(kpis.isencaoDeferidas)} cor="purple" delta={deltas?.isencaoDeferidas} />
               {(kpis.condEspeciais > 0 || kpis.condDeferidas > 0) && (
                 <>
-                  <KpiCard label="Condições Especiais" value={fmt(kpis.condEspeciais)} cor="teal" />
-                  <KpiCard label="Condições Deferidas" value={fmt(kpis.condDeferidas)} cor="red" />
+                  <KpiCard label="Condições Especiais" value={fmt(kpis.condEspeciais)} cor="teal" delta={deltas?.condEspeciais} />
+                  <KpiCard label="Condições Deferidas" value={fmt(kpis.condDeferidas)} cor="red" delta={deltas?.condDeferidas} />
                 </>
               )}
             </GradeKpi>

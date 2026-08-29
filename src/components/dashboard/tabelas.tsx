@@ -6,7 +6,8 @@ import {
   Table, TableHeader, TableBody, TableHead, TableRow, TableCell,
 } from "@/components/ui/table"
 import { cn, fmt } from "@/lib/utils"
-import type { LinhaResumo, LinhaEscola } from "@/types"
+import { DeltaBadge } from "@/components/dashboard/kpi-cards"
+import type { LinhaResumo, LinhaEscola, LinhaEscolaTop } from "@/types"
 import { MODALIDADE_LABELS } from "@/types"
 
 interface Ordenacao {
@@ -125,7 +126,7 @@ const COLUNAS_ESCOLAS = [
   { chave: "Inscritos", rotulo: "Inscritos", tipo: "numero", direita: true },
 ]
 
-export function TabelaEscolas({ linhas, comCampus }: { linhas: LinhaEscola[]; comCampus: boolean }) {
+export function TabelaEscolas({ linhas, comCampus }: { linhas: LinhaEscolaTop[]; comCampus: boolean }) {
   const { ordenacao, aoOrdenar } = useOrdenacao("Inscritos")
 
   const linhasOrdenadas = [...linhas].sort((a, b) => {
@@ -153,6 +154,7 @@ export function TabelaEscolas({ linhas, comCampus }: { linhas: LinhaEscola[]; co
               />
             </TableHead>
           ))}
+          <TableHead className="text-right">Crescimento</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -165,6 +167,9 @@ export function TabelaEscolas({ linhas, comCampus }: { linhas: LinhaEscola[]; co
             <TableCell>{r.Tipo}</TableCell>
             <TableCell>{r.Area}</TableCell>
             <TableCell className="text-right font-semibold">{fmt(r.Inscritos)}</TableCell>
+            <TableCell className="text-right">
+              {r.delta !== null && <DeltaBadge delta={r.delta} />}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
