@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, BarChart, Bar, PieChart, Pie, Cell,
@@ -10,6 +11,12 @@ import { MODALIDADE_LABELS } from "@/types"
 const CORES = ["#2e7d32", "#1565c0", "#ef6c00"]
 const CORES_DONUT = ["#2e7d32", "#66bb6a", "#a5d6a7", "#1565c0", "#ef6c00", "#6a1b9a",
   "#00838f", "#c62828", "#f9a825", "#5d4037", "#455a64", "#7b1fa2"]
+
+const LEGENDA_BARRAS: Record<string, string> = {
+  INT: "Integrado",
+  SUB: "Subsequente",
+  SUP: "Superior",
+}
 
 export function formataDataEixo(data: string): string {
   const [d] = String(data).split(" ")
@@ -141,7 +148,50 @@ export function GraficoEvolucao({ data, altura = 320 }: { data: PontoEvolucao[];
   )
 }
 
+function LegendaBarras({ mods, ativa, onAlternar }: {
+  mods: string[]
+  ativa: string | null
+  onAlternar: (m: string) => void
+}) {
+  return (
+    <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 16, paddingTop: 6 }}>
+      {mods.map((m) => {
+        const cor = CORES[mods.indexOf(m) % CORES.length]
+        const selecionada = ativa === m
+        const apagada = ativa !== null && !selecionada
+        return (
+          <button
+            key={m}
+            type="button"
+            onClick={() => onAlternar(m)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              fontSize: 12,
+              fontFamily: "inherit",
+              color: "var(--foreground)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "2px 4px",
+              borderRadius: 4,
+              opacity: apagada ? 0.4 : 1,
+              fontWeight: selecionada ? 700 : 400,
+            }}
+          >
+            <span style={{ width: 10, height: 10, borderRadius: 3, backgroundColor: cor, display: "inline-block" }} />
+            {LEGENDA_BARRAS[m] ?? m}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 export function GraficoBarrasAgrupadas({ data, altura = 600 }: { data: BarrasUnidades[]; altura?: number }) {
+  const [selMod, setSelMod] = useState<string | null>(null)
+
   const mods = [...new Set(data.map((d) => d.modalidade))]
   const porUni = new Map<string, Record<string, number>>()
   for (const d of data) {
@@ -149,7 +199,22 @@ export function GraficoBarrasAgrupadas({ data, altura = 600 }: { data: BarrasUni
     entry[d.modalidade] = (entry[d.modalidade] ?? 0) + d.inscritos
     porUni.set(d.unidade, entry)
   }
-  const chartData = [...porUni.entries()].map(([unidade, v]) => ({ unidade, ...v }))
+
+  const unidades = [...porUni.entries()].map(([unidade, valores]) => ({
+    unidade,
+    valores,
+    total: mods.reduce((s, m) => s + (valores[m] ?? 0), 0),
+  }))
+
+  const ordenados = [...unidades].sort((a, b) => {
+    const va = selMod ? (a.valores[selMod] ?? 0) : a.total
+    const vb = selMod ? (b.valores[selMod] ?? 0) : b.total
+    return vb - va
+  })
+  const chartData = ordenados.map(({ unidade, valores }) => ({ unidade, ...valores }))
+
+  const modsVisiveis = selMod ? [selMod] : mods
+  const alternar = (m: string) => setSelMod((atual) => (atual === m ? null : m))
 
   return (
     <div className="overflow-x-auto">
@@ -163,9 +228,18 @@ export function GraficoBarrasAgrupadas({ data, altura = 600 }: { data: BarrasUni
               contentStyle={tooltipStyle}
               formatter={(value: number, name: string) => [value.toLocaleString("pt-BR"), MODALIDADE_LABELS[name] ?? name]}
             />
-            <Legend wrapperStyle={{ fontSize: 12 }} />
-            {mods.map((m, i) => (
-              <Bar key={m} dataKey={m} name={m} fill={CORES[i % CORES.length]} radius={[6, 6, 0, 0]} />
+            <Legend
+              wrapperStyle={{ fontSize: 12 }}
+              content={<LegendaBarras mods={mods} ativa={selMod} onAlternar={alternar} />}
+            />
+            {modsVisiveis.map((m) => (
+              <Bar
+                key={m}
+                dataKey={m}
+                name={m}
+                fill={CORES[mods.indexOf(m) % CORES.length]}
+                radius={[6, 6, 0, 0]}
+              />
             ))}
           </BarChart>
         </ResponsiveContainer>
